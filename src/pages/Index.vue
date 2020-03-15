@@ -1,14 +1,15 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
-    >
+    <area-chart />
   </q-page>
 </template>
 
 <script>
+import areachart from './charts/Area.vue'
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  components: {
+    'area-chart': areachart
+  }
 }
 </script>
