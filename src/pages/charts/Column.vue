@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <apexchart height="400" width="1200" type="area" ref="areaChart" :options="chartOptions" :series="series"></apexchart>
+    <apexchart height="400" width="1200" type="bar" ref="areaChart" :options="options" :series="series"></apexchart>
   </q-page>
 </template>
 
@@ -17,17 +17,7 @@ export default {
         name: 'Global Confirmed Cases',
         data: []
       }],
-      chartOptions: {
-        chart: {
-          height: 350,
-          type: 'area'
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'smooth'
-        },
+      options: {
         xaxis: {
           categories: []
         }
