@@ -2,7 +2,7 @@
   "name": "corona-dashboard",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "COVID-19 Dashboard",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
   "author": "MFLATSCH3R <markus.flatscher1@gmail.com>",

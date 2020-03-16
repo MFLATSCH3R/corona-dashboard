@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <apexchart height="400" width="1200" type="area" ref="areaChart" :options="chartOptions" :series="series"></apexchart>
+    <apexchart height="400" width="600" type="area" ref="areaChart" :options="chartOptions" :series="series"></apexchart>
   </q-page>
 </template>
 
@@ -20,6 +20,7 @@ export default {
       chartOptions: {
         chart: {
           height: 350,
+          width: 400,
           type: 'area'
         },
         dataLabels: {

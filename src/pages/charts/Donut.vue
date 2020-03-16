@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-    <h2>Total Affected: {{ totalAffected }}</h2>
-    <apexchart height="380" width="800" type="donut" ref="chart" :options="chartOptions" :series="series"></apexchart>
+    <h3>Total: {{ totalAffected }}</h3>
+    <apexchart height="380" width="600" type="donut" ref="chart" :options="chartOptions" :series="series"></apexchart>
     <h6>updated: {{ date }}</h6>
   </q-page>
 </template>
