@@ -1,11 +1,18 @@
 <template>
-  <q-page padding>
-    <apexchart height="400" width="600" type="area" ref="areaChart" :options="chartOptions" :series="series"></apexchart>
-  </q-page>
+  <div id="chart">
+    <div class="toolbar">
+      <button id="one_month" @click="updateData('one_month')" :class="{active: selection==='one_month'}">1M</button>
+      <button id="six_months" @click="updateData('six_months')" :class="{active: selection==='six_months'}">6M</button>
+      <button id="one_year" @click="updateData('one_year')" :class="{active: selection==='one_year'}">1Y</button>
+      <button id="all" @click="updateData('all')" :class="{active: selection==='all'}">ALL</button>
+    </div>
+    <apexchart height="600" width="1000" type="area" ref="areaChart" :options="options" :series="series"></apexchart>
+  </div>
 </template>
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
+import * as moment from 'moment'
 export default {
   name: 'AreaChart',
   components: {
@@ -17,11 +24,10 @@ export default {
         name: 'Global Confirmed Cases',
         data: []
       }],
-      chartOptions: {
+      options: {
         chart: {
-          height: 350,
-          width: 400,
-          type: 'area'
+          type: 'area',
+          height: 600
         },
         dataLabels: {
           enabled: false
@@ -29,9 +35,40 @@ export default {
         stroke: {
           curve: 'smooth'
         },
+        annotations: {
+          xaxis: [{
+            x: new Date('12 Feb 2020 12:00').getTime(),
+            borderColor: '#999',
+            yAxisIndex: 0,
+            label: {
+              show: true,
+              text: 'Couting Methods changed',
+              style: {
+                color: '#fff',
+                background: '#775DD0'
+              }
+            }
+          }]
+        },
         xaxis: {
-          categories: []
-        }
+          type: 'datetime',
+          tickAmount: 8
+        },
+        tooltip: {
+          x: {
+            format: 'dd MMM yyyy'
+          }
+        },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 100]
+          }
+        },
+        selection: 'one_year'
       }
     }
   },
@@ -66,7 +103,7 @@ export default {
         }
         const timeEntry = formatDate(item.attributes.Report_Date)
         timeSeries.push(timeEntry)
-        seriesData.push(item.attributes.Total_Confirmed)
+        seriesData.push([item.attributes.Report_Date, item.attributes.Total_Confirmed])
       })
 
       return {
@@ -83,6 +120,20 @@ export default {
           categories: data.categories
         }
       })
+    },
+    updateData (timeline) {
+      debugger
+      this.selection = timeline
+      switch (timeline) {
+        case 'one_week':
+        case 'one_month':
+          this.options = {
+            xaxis: {
+              min: moment(new Date()).subtract(1, 'months').valueOf(),
+              max: new Date().getTime()
+            }
+          }
+      }
     }
   }
 }

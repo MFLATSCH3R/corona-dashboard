@@ -1,7 +1,17 @@
 <template>
   <q-page class="flex flex-center">
+    <!--
     <pie-chart />
     <area-chart />
+    -->
+    <div class="q-pa-md">
+      <div class="row justify-center">
+        <pie-chart />
+      </div>
+      <div class="row justify-center">
+        <area-chart />
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -13,6 +23,12 @@ export default {
   components: {
     'area-chart': areachart,
     'pie-chart': piechart
+  },
+  data () {
+    return {
+      slide: 'style',
+      lorem: 'Demo Text'
+    }
   }
 }
 </script>

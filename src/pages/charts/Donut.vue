@@ -1,9 +1,9 @@
 <template>
-  <q-page padding>
-    <h3>Total: {{ totalAffected }}</h3>
-    <apexchart height="380" width="600" type="donut" ref="chart" :options="chartOptions" :series="series"></apexchart>
-    <h6>updated: {{ date }}</h6>
-  </q-page>
+    <div>
+      <h6>Total: {{ totalAffected }}</h6>
+      <apexchart width="500px" type="donut" ref="chart" :options="options" :series="series"></apexchart>
+      <p class="text-weight-bold justify-center">last updated: {{ date }}</p>
+    </div>
 </template>
 
 <script>
@@ -19,31 +19,40 @@ export default {
       rawData: null,
       totalAffected: 0,
       date: null,
-      series: [40, 60, 100, 40, 999],
-      chartOptions: {
+      series: [],
+      options: {
         chart: {
-          width: 380,
           type: 'donut'
         },
         labels: ['Deaths', 'Recovered', 'Sick'],
         dataLabels: {
-          enabled: false
+          enabled: true
         },
         responsive: [{
-          breakpoint: 480,
+          breakpoint: 450,
           options: {
             chart: {
-              width: 200
+              width: '450'
             },
             legend: {
-              show: false
+              position: 'bottom'
             }
           }
         }],
         legend: {
           position: 'right',
           offsetY: 0,
-          height: 230
+          height: 100,
+          show: true
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              labels: {
+                show: false
+              }
+            }
+          }
         }
       }
     }

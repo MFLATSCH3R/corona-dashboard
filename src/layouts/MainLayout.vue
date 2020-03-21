@@ -10,19 +10,15 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-
-        <q-toolbar-title>Corona Dashboard</q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title>COVID-19 Dashboard</q-toolbar-title>
       </q-toolbar>
     </q-header>
-
+    <!--
     <q-drawer
       v-model="leftDrawerOpen"
       bordered
       content-class="bg-grey-1"
     >
-      <!--
       <q-list>
         <q-item-label
           header
@@ -36,8 +32,8 @@
           v-bind="link"
         />
       </q-list>
-      -->
     </q-drawer>
+    -->
 
     <q-page-container>
       <router-view />
