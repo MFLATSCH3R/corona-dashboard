@@ -28,6 +28,15 @@ export default {
         dataLabels: {
           enabled: true
         },
+        theme: {
+          /*
+          palette: 'palette3'
+          */
+          monochrome: {
+            enabled: true,
+            color: '#26A69A'
+          }
+        },
         responsive: [{
           breakpoint: 450,
           options: {

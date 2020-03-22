@@ -1,9 +1,10 @@
 <template>
   <div id="chart">
     <div class="toolbar">
+      <button id="one_week" @click="updateData('one_week')" :class="{active: selection==='one_week'}">1W</button>
       <button id="one_month" @click="updateData('one_month')" :class="{active: selection==='one_month'}">1M</button>
+      <button id="three_months" @click="updateData('three_months')" :class="{active: selection==='three_months'}">3M</button>
       <button id="six_months" @click="updateData('six_months')" :class="{active: selection==='six_months'}">6M</button>
-      <button id="one_year" @click="updateData('one_year')" :class="{active: selection==='one_year'}">1Y</button>
       <button id="all" @click="updateData('all')" :class="{active: selection==='all'}">ALL</button>
     </div>
     <apexchart height="600" width="1000" type="area" ref="areaChart" :options="options" :series="series"></apexchart>
@@ -20,6 +21,7 @@ export default {
   },
   data () {
     return {
+      selection: 'one_year',
       series: [{
         name: 'Global Confirmed Cases',
         data: []
@@ -35,6 +37,17 @@ export default {
         stroke: {
           curve: 'smooth'
         },
+        responsive: [{
+          breakpoint: 450,
+          options: {
+            chart: {
+              width: '450'
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }],
         annotations: {
           xaxis: [{
             x: new Date('12 Feb 2020 12:00').getTime(),
@@ -44,8 +57,8 @@ export default {
               show: true,
               text: 'Couting Methods changed',
               style: {
-                color: '#fff',
-                background: '#775DD0'
+                color: '#FFFFFF',
+                background: '#CE63E0'
               }
             }
           }]
@@ -59,16 +72,21 @@ export default {
             format: 'dd MMM yyyy'
           }
         },
+        theme: {
+          monochrome: {
+            enabled: true,
+            color: '#26A69A'
+          }
+        },
         fill: {
           type: 'gradient',
           gradient: {
             shadeIntensity: 1,
-            opacityFrom: 0.7,
-            opacityTo: 0.9,
+            opacityFrom: 0.9,
+            opacityTo: 0.7,
             stops: [0, 100]
           }
-        },
-        selection: 'one_year'
+        }
       }
     }
   },
@@ -122,15 +140,53 @@ export default {
       })
     },
     updateData (timeline) {
-      debugger
       this.selection = timeline
       switch (timeline) {
         case 'one_week':
+          this.options = {
+            xaxis: {
+              min: moment(new Date()).subtract(1, 'weeks').valueOf(),
+              max: new Date().getTime()
+            }
+          }
+          break
         case 'one_month':
           this.options = {
             xaxis: {
               min: moment(new Date()).subtract(1, 'months').valueOf(),
               max: new Date().getTime()
+            }
+          }
+          break
+        case 'three_months':
+          this.options = {
+            xaxis: {
+              min: moment(new Date()).subtract(3, 'months').valueOf(),
+              max: new Date().getTime()
+            }
+          }
+          break
+        case 'six_months':
+          this.options = {
+            xaxis: {
+              min: moment(new Date()).subtract(6, 'months').valueOf(),
+              max: new Date().getTime()
+            }
+          }
+          break
+        case 'all':
+          this.options = {
+            xaxis: {
+              min: undefined,
+              max: undefined
+            }
+          }
+          break
+        default:
+          this.options = {
+            xaxis: {
+              min: undefined,
+              max: undefined
             }
           }
       }

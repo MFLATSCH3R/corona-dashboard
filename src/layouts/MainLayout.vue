@@ -2,6 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
+        <!--
         <q-btn
           flat
           dense
@@ -10,6 +11,7 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
+        -->
         <q-toolbar-title>COVID-19 Dashboard</q-toolbar-title>
       </q-toolbar>
     </q-header>
