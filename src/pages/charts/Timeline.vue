@@ -111,33 +111,16 @@ export default {
         })
     },
     processData (data) {
-      const timeSeries = []
       const seriesData = []
-
       data.features.forEach((item) => {
-        function formatDate (ms) {
-          const date = new Date(ms)
-          return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()
-        }
-        const timeEntry = formatDate(item.attributes.Report_Date)
-        timeSeries.push(timeEntry)
         seriesData.push([item.attributes.Report_Date, item.attributes.Total_Confirmed])
       })
-
-      return {
-        series: seriesData,
-        categories: timeSeries
-      }
+      return seriesData
     },
     updateChart (data) {
       this.series = [{
-        data: data.series
+        data: data
       }]
-      this.$refs.areaChart.updateOptions({
-        xaxis: {
-          categories: data.categories
-        }
-      })
     },
     updateData (timeline) {
       this.selection = timeline

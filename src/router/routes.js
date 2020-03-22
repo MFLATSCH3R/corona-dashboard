@@ -4,7 +4,26 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      {
+        path: '',
+        component: () => import('pages/Dashboard.vue')
+      },
+      {
+        path: 'dashboard',
+        component: () => import('pages/Dashboard.vue')
+      },
+      {
+        path: 'piechart',
+        component: () => import('pages/ChartDonut.vue')
+      },
+      {
+        path: 'timeline',
+        component: () => import('pages/ChartTimeline.vue')
+      },
+      {
+        path: 'map',
+        component: () => import('pages/MapPage.vue')
+      }
     ]
   }
 ]
