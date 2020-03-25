@@ -27,6 +27,7 @@ export default {
         })
       })
       map.getLayers()
+      // api https://coronavirus-tracker-api.herokuapp.com/v2/locations
     }
   }
 }

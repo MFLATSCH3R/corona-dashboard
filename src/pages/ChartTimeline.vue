@@ -24,19 +24,25 @@ export default {
   },
   methods: {
     loadData () {
-      this.$axios.get('https://services9.arcgis.com/N9p5hsImWXAccRNI/arcgis/rest/services/PmO6oUpJizhI0jM8pu3n/FeatureServer/0/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=Report_Date_String%20asc&outSR=102100&resultOffset=0&resultRecordCount=1000&cacheHint=true')
-        .then((response) => {
-          this.rawData = response.data
-          this.processData(this.rawData)
-        }).catch((err) => {
-          this.$q.notify({
-            color: 'negative',
-            position: 'top',
-            message: 'failed loading data',
-            icon: 'report_problem'
-          })
-          console.log(err)
+      // https://coronavirus-tracker-api.herokuapp.com/v2/locations?timelines=1
+      // this.$axios.get('https://services9.arcgis.com/N9p5hsImWXAccRNI/arcgis/rest/services/PmO6oUpJizhI0jM8pu3n/FeatureServer/0/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=Report_Date_String%20asc&outSR=102100&resultOffset=0&resultRecordCount=1000&cacheHint=true')
+      this.$axios({
+        url: 'https://coronavirus-tracker-api.herokuapp.com/v2/locations?timelines=1',
+        method: 'GET'
+      }).then((response) => {
+        debugger
+        this.rawData = response.data
+        this.processData(this.rawData)
+      }).catch((err) => {
+        debugger
+        this.$q.notify({
+          color: 'negative',
+          position: 'top',
+          message: 'failed loading data',
+          icon: 'report_problem'
         })
+        console.log(err)
+      })
     },
     processData (data) {
       const seriesData = []

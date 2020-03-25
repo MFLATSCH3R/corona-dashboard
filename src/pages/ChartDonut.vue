@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     loadData () {
-      this.$axios.get('https://corona.lmao.ninja/all')
+      this.$axios.get('https://covidapi.info/api/v1/global')
         .then((response) => {
           this.rawData = response.data
           // redraw chart
@@ -45,10 +45,10 @@ export default {
         })
     },
     formatData (data) {
-      this.date = moment(new Date(data.updated)).format('DD.MM.YYYY HH:MM')
-      this.totalAffected = parseFloat(data.cases).toLocaleString('de')
-      const pending = data.cases - data.deaths - data.recovered
-      this.series = [data.deaths, data.recovered, pending]
+      this.date = moment(new Date(data.date)).format('DD.MM.YYYY HH:MM')
+      this.totalAffected = parseFloat(data.result.confirmed).toLocaleString('de')
+      const sick = data.result.confirmed - data.result.deaths - data.result.recovered
+      this.series = [data.result.deaths, data.result.recovered, sick]
     }
   }
 }
