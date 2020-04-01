@@ -1,21 +1,69 @@
 <template>
-  <!-- <q-page class="flex flex-center"> -->
-  <q-page class="center">
+  <q-page>
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="my-card" flat bordered>
-        <q-card-section horizontal>
-          <q-img class="col" src="../assets/corona.jpg">
-            <div class="absolute-bottom">
-              <div class="text-h4 text-secondary">{{ totalAffected }}</div>
-              <div class="text-subtitle2">reported cases</div>
-            </div>
-          </q-img>
-          <q-card-actions vertical class="justify-around q-px-md">
-            <q-btn flat round color="primary" icon="pie_chart" to="/piechart" />
-            <q-btn flat round color="primary" icon="show_chart" to="/timeline" />
-            <q-btn flat round color="primary" icon="map" to="/map" />
-          </q-card-actions>
-        </q-card-section>
+        <q-card class="my-card">
+        <q-img src="../assets/corona.jpg">
+          <div class="absolute-bottom">
+            <div class="text-h6">Pie-Chart</div>
+        </div>
+        </q-img>
+        <q-card-actions align="right">
+          <q-btn
+            round
+            color="accent"
+            icon="pie_chart"
+            to="piechart">
+            <q-tooltip>View Graph</q-tooltip>
+          </q-btn>
+        </q-card-actions>
+      </q-card>
+        <q-card class="my-card">
+        <q-img src="../assets/corona.jpg">
+          <div class="absolute-bottom">
+            <div class="text-h6">Timeline</div>
+        </div>
+        </q-img>
+        <q-card-actions align="right">
+          <q-btn
+            round
+            color="accent"
+            icon="show_chart"
+            to="timeline">
+            <q-tooltip>View Graph</q-tooltip>
+          </q-btn>
+        </q-card-actions>
+      </q-card>
+      <q-card class="my-card">
+        <q-img src="../assets/corona.jpg">
+          <div class="absolute-bottom">
+            <div class="text-h6">2D Map</div>
+        </div>
+        </q-img>
+        <q-card-actions align="right">
+          <q-btn
+            round
+            color="accent"
+            icon="map"
+            to="map">
+            <q-tooltip>View Map</q-tooltip>
+          </q-btn>
+        </q-card-actions>
+      </q-card>
+      <q-card class="my-card">
+        <q-img src="../assets/corona.jpg">
+          <div class="absolute-bottom">
+            <div class="text-h6">3D Map</div>
+        </div>
+        </q-img>
+        <q-card-actions align="right">
+          <q-btn
+            round
+            color="accent"
+            icon="map"
+            to="cesium">
+            <q-tooltip>View 3D-Map</q-tooltip>
+          </q-btn>
+        </q-card-actions>
       </q-card>
     </div>
   </q-page>

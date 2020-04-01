@@ -31,10 +31,10 @@ export default {
           }
         },
         responsive: [{
-          breakpoint: 450,
+          breakpoint: 490,
           options: {
             chart: {
-              width: '450'
+              width: '400px'
             },
             legend: {
               position: 'bottom'

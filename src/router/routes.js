@@ -23,6 +23,10 @@ const routes = [
       {
         path: 'map',
         component: () => import('pages/MapPage.vue')
+      },
+      {
+        path: 'cesium',
+        component: () => import('pages/CesiumPage.vue')
       }
     ]
   }

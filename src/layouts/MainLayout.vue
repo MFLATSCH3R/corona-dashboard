@@ -47,19 +47,19 @@ export default {
       menuItem: [
         {
           icon: 'home',
-          label: 'Hauptseite',
+          label: 'Main Page',
           routerTarget: 'dashboard',
           separator: true
         },
         {
           icon: 'pie_chart',
-          label: 'Gesamtübersicht',
+          label: 'Overview',
           routerTarget: 'piechart',
           separator: false
         },
         {
           icon: 'show_chart',
-          label: 'Zeitverlauf',
+          label: 'Timeline',
           routerTarget: 'timeline',
           separator: false
         },

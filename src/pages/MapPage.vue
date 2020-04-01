@@ -1,9 +1,9 @@
 <template>
-  <ol-map :data="mapData" class="map-container" />
+  <ol-map :data="mapData" :x="13.000" :y="47.790" class="map-container" />
 </template>
 
 <script>
-import map from './map/OLMap.vue'
+import map from './map/OLCSMap.vue'
 export default {
   name: 'Map',
   components: {

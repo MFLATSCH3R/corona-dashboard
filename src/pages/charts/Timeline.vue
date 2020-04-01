@@ -6,13 +6,14 @@
       <button id="three_months" @click="updateData('three_months')" :class="{active: selection==='three_months'}">3M</button>
       <button id="six_months" @click="updateData('six_months')" :class="{active: selection==='six_months'}">6M</button>
       <button id="all" @click="updateData('all')" :class="{active: selection==='all'}">ALL</button>
-      <!--
-      <button id="austria" @click="showCountry('austria')" :class="{active: selection==='one_week'}">Austria</button>
-      <button id="china" @click="showCountry('china')" :class="{active: selection==='one_month'}">China</button>
-      <button id="germany" @click="updateData('three_months')" :class="{active: selection==='three_months'}">Germany</button>
-      <button id="italy" @click="updateData('six_months')" :class="{active: selection==='six_months'}">Italy</button>
-      <button id="all" @click="updateData('all')" :class="{active: selection==='all'}">ALL</button>
-      -->
+    </div>
+    <div class="q-gutter-sm">
+      <q-checkbox v-model="countryArr" val="Austria" label="Austria" @input="updateCountries()" />
+      <q-checkbox v-model="countryArr" val="Germany" label="Germany" @input="updateCountries()" />
+      <q-checkbox v-model="countryArr" val="Italy" label="Italy" @input="updateCountries()" />
+      <q-checkbox v-model="countryArr" val="Spain" label="Spain" @input="updateCountries()" />
+      <q-checkbox v-model="countryArr" val="US" label="USA" @input="updateCountries()" />
+      <q-checkbox v-model="countryArr" val="Globally Confirmed Cases" label="Globally Confirmed Cases" @input="updateCountries()" />
     </div>
     <apexchart height="600" width="1000" type="area" ref="areaChart" :options="options" :series="series"></apexchart>
   </div>
@@ -28,7 +29,9 @@ export default {
   },
   data () {
     return {
+      countryArr: ['Austria', 'Germany', 'Italy', 'Spain', 'US', 'Globally Confirmed Cases'],
       selection: 'one_year',
+      rawData: [],
       series: [{
         name: 'Global Confirmed Cases',
         data: []
@@ -45,10 +48,10 @@ export default {
           curve: 'straight'
         },
         responsive: [{
-          breakpoint: 450,
+          breakpoint: 1000,
           options: {
             chart: {
-              width: '450'
+              width: '390px'
             },
             legend: {
               position: 'bottom'
@@ -80,18 +83,21 @@ export default {
           }
         },
         theme: {
+          palette: 'palette1'
+          /*
           monochrome: {
             enabled: true,
             color: '#26A69A'
           }
+          */
         },
         fill: {
           type: 'gradient',
           gradient: {
             shadeIntensity: 1,
-            opacityFrom: 0.9,
-            opacityTo: 0.7,
-            stops: [0, 100]
+            opacityFrom: 0.8,
+            opacityTo: 0.4,
+            stops: [50, 100]
           }
         }
       }
@@ -120,8 +126,10 @@ export default {
     },
     processData (data) {
       try {
-        const series = []
+        const seriesArray = []
+        let series = []
         const tempData = {}
+        // globally confirmed cases
         data.locations.forEach((item) => {
           const cases = item.timelines.confirmed.timeline
           const arr = Object.keys(cases)
@@ -138,7 +146,31 @@ export default {
         Object.keys(tempData).forEach((timestamp) => {
           series.push([parseFloat(timestamp), tempData[timestamp]])
         })
-        return series
+        seriesArray.push({
+          name: 'Globally Confirmed Cases',
+          data: series
+        })
+        series = []
+
+        // By country
+        const countries = ['Austria', 'Germany', 'Italy', 'Spain', 'US']
+        data.locations.forEach((item) => {
+          if (countries.includes(item.country)) {
+            const cases = item.timelines.confirmed.timeline
+            const arr = Object.keys(cases)
+            arr.forEach((entry) => {
+              const timestamp = new Date(entry).getTime()
+              series.push([parseFloat(timestamp), cases[entry]])
+            })
+            seriesArray.push({
+              name: item.country,
+              data: series
+            })
+            series = []
+          }
+        })
+
+        return seriesArray
       } catch (e) {
         console.log(e)
         this.$q.notify({
@@ -151,9 +183,13 @@ export default {
       }
     },
     updateChart (data) {
+      this.rawData = data
+      this.series = data
+      /*
       this.series = [{
         data: data
       }]
+      */
     },
     updateData (timeline) {
       this.selection = timeline
@@ -207,6 +243,16 @@ export default {
             }
           }
       }
+    },
+    updateCountries () {
+      const raw = this.rawData
+      const newSeries = []
+      Object.keys(raw).forEach((item) => {
+        if (this.countryArr.includes(raw[item].name)) {
+          newSeries.push(raw[item])
+        }
+      })
+      this.series = newSeries
     }
   }
 }

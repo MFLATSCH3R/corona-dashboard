@@ -30,11 +30,9 @@ export default {
         url: 'https://coronavirus-tracker-api.herokuapp.com/v2/locations?timelines=1',
         method: 'GET'
       }).then((response) => {
-        debugger
         this.rawData = response.data
         this.processData(this.rawData)
       }).catch((err) => {
-        debugger
         this.$q.notify({
           color: 'negative',
           position: 'top',
