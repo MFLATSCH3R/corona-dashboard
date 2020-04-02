@@ -36,7 +36,7 @@
       <q-card class="my-card">
         <q-img src="../assets/corona.jpg">
           <div class="absolute-bottom">
-            <div class="text-h6">2D Map</div>
+            <div class="text-h6">Map</div>
         </div>
         </q-img>
         <q-card-actions align="right">
@@ -49,6 +49,7 @@
           </q-btn>
         </q-card-actions>
       </q-card>
+      <!--
       <q-card class="my-card">
         <q-img src="../assets/corona.jpg">
           <div class="absolute-bottom">
@@ -65,6 +66,7 @@
           </q-btn>
         </q-card-actions>
       </q-card>
+      -->
     </div>
   </q-page>
 </template>

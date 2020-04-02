@@ -8,16 +8,14 @@
           round
           icon="menu"
           aria-label="Menu"
-          @click="drawer = !drawer"
-        />
+          @click="drawer = !drawer" />
         <q-toolbar-title>COVID-19 Dashboard</q-toolbar-title>
       </q-toolbar>
     </q-header>
     <q-drawer
       v-model="drawer"
       bordered
-      content-class="bg-grey-3"
-    >
+      content-class="bg-grey-3">
       <q-scroll-area class="fit">
         <q-list v-for="(menuItem, index) in menuItem" :key="index">
           <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple :to="menuItem.routerTarget">
@@ -43,7 +41,7 @@ export default {
   name: 'MainLayout',
   data () {
     return {
-      drawer: true,
+      drawer: false,
       menuItem: [
         {
           icon: 'home',
